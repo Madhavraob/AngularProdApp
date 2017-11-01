@@ -1,0 +1,793 @@
+<!-- -------------- Main Wrapper -------------- -->
+
+<section id="content_wrapper">
+    <!-- -------------- Topbar -------------- -->
+    <header id="topbar" class="ph10 alt allcp-form theme-primary">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <span class="panel-title">Applicable Large Employee Details</span>
+            </div>
+        </div>
+    </header>
+    <!-- -------------- /Topbar -------------- -->
+
+    <section id="content" class="table-layout animated fadeIn">
+        <div class="chute chute-center">
+            <div class="row" style="display:none">
+                <div class="col-xs-12">
+                    <div class="panel mb25 mt5">
+                        <form method="post" action="/" id="allcp-form">
+                            <div class="allcp-form theme-primary btn-bordered center-block">
+                                <div class="section row">
+                                    <div class="col-md-4 ph10 mb5">
+                                        <h6 class="">Search for Ale Details</h6>
+                                        <label for="itemsearch" class="field">
+                                                   <input type="search" name="itemsearch" id="itemsearch" class="gui-input" placeholder="Search for products">
+                                                  </label>
+                                    </div>
+                                    <div class="col-md-4 ph10 mb5">
+                                        <h6 class="">Filtering</h6>
+                                        <label class="field select">
+                                                <select id="language" name="language">
+                                                    <option value="">Select Filter</option>
+                                                    <option value="EN">English</option>
+                                                    <option value="FR">French</option>
+                                                    <option value="SP">Spanish</option>
+                                                    <option value="CH">Chinese</option>
+                                                    <option value="RU">Russian</option>
+                                                </select>
+                                                <i class="arrow double"></i>
+                                            </label>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <h6>&nbsp;</h6>
+                                        <button class="btn btn-bordered btn-primary mb5 dsde" type="submit">Filter</button>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <h6>&nbsp;</h6>
+                                        <button class="btn btn-bordered btn-primary mb5 dsde" type="reset">Clear</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+
+                    <div class="panel">
+                        <div class="panel-custom">
+                            <a href="#" data-toggle="modal" data-target="#myModalNew" class="btn btn-primary btn-sm ml10 text-right" (click)="clearControlGroupObjectFromForm()" title="New ALE Details">
+                               <span class="fa fa-plus pr5"></span> New ALE Details</a>
+                        </div>
+                        <div style="clear: both;"></div>
+                        <div class="panel-heading">
+                            <span class="panel-title hidden-xs">Applicable Large Employee Details</span>
+                        </div>
+                        <div class="panel-body pn">
+                            <div class="table-responsive">
+                                <table class="table allcp-form theme-warning tc-checkbox-1 fs13">
+                                    <thead>
+                                        <tr class="bg-light">
+                                            <!-- <th class="text-center"></th>
+                                            <th class="text-center"></th> -->
+                                            <!-- <th class="">Ale Id</th> -->
+                                            <th class="">Tax Year</th>
+                                            <th class="">ACA Subscriber</th>
+                                            <th class="">Filling Authoritative 1094C</th>
+                                            <th class="">ACA Reporting Shared</th>
+                                            <th class="">4980H Transition Relief</th>
+                                            <th class="">Additional 1095C Count</th>
+                                            <!-- <th class="">Control Group ID</th> -->
+                                            <th class="text-right"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let row of data">
+                                            <!-- <td class="text-center">
+                                                <label class="option block mn">
+                                                    <input type="checkbox" name="inputname" value="FR">
+                                                    <span class="checkbox mn"></span>
+                                                </label>
+                                            </td>
+                                            <td class="w100">
+                                                <img class="img-responsive mw40 ib mr10" title="user" src="assets/img/pages/products/1.jpg">
+                                            </td> -->
+                                            <!-- <td class="">{{row?.aleId}}</td> -->
+                                            <td class="">{{row?.aleTaxYear}}</td>
+                                            <td class="">{{row?.isAcaSubscriber}}</td>
+                                            <td class="">{{row?.isFilingAuthoritative1094c}}</td>
+                                            <td class="">{{row?.isAcaReportingShared}}</td>
+                                            <td class="">{{row?.hTransitionRelief}}</td>
+                                            <td class="">{{row?.additional1095cCount}}</td>
+                                            <!-- <td class="">{{row?.controlGroupId}}</td> -->
+                                            <td class="text-right">
+                                                <div class="btn-group text-right">
+                                                    <button type="button" class="btn btn-success br2 btn-xs fs12 dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> Active
+                                                        <span class="caret ml5"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li><a class="" data-toggle="modal" data-target="#myModalEdit" (click)="editAleDetails(row.aleId,row.aleDetailsId,row.aleTaxYear,true)"> Edit</a></li>
+                                                        <li><a class="" data-toggle="modal" data-target="#myModalDelete" (click)="deleteAleDetails(row.aleId,row.aleDetailsId,row.aleTaxYear)"> Delete</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="modal fade" id="myModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Edit ALE</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="chute chute-center">
+                        <div class="allcp-form theme-primary center-block">
+                            <!-- <closed> -->
+                            <form method="post" id="allcp-form" novalidate="novalidate" [formGroup]="aleDetailsForm" (ngSubmit)="updateAleDetails()">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="section row">
+                                                <div class="col-md-6 ph10 mb5">
+                                                    <h6 class="">ALE Tax Year</h6>
+                                                    <div>{{aleTaxYearControl.value}}</div>
+                                                </div>
+                                                <div class="col-md-6 ph10 mb5">
+                                                       <h6 class="">ALE</h6>
+                                                    <label for="CALE" class="field select prepend-icon">
+                                                        <select id="CALE" formControlName="aleId" aria-required="true" aria-invalid="true">
+                                                            <option *ngFor="let ale of aleMap" value={{ale.aleId}} selected="ale.aleId==aleId.value">
+                                                                {{ale.aleName}}
+                                                            </option>
+                                                        </select>
+                                                        <i class="arrow"></i>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="section row">
+                                                <div class="col-md-6 ph10 mb5">
+                                                    <h6>Control Group</h6>
+                                                    <label for="EControlGroup" class="field select prepend-icon">
+                                                        <select id="EControlGroup" formControlName="controlGroupId" aria-required="true" aria-invalid="true">
+                                                            <option *ngFor="let cgs of controlGroupMap" value={{cgs.controlGroupId}} selected="cgs.controlGroupId==controlGroupId.value" >
+                                                                {{cgs.controlGroupName}}
+                                                            </option>
+                                                        </select>
+                                                        <i class="arrow"></i>
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-6 ph10">
+                                                    <div class="mb5 mt5">
+                                                        <h6>Aditional 1095C Count</h6>
+                                                        <label for="EAditionalCount" class="field prepend-icon">
+                                                       <input type="text" id="EAditionalCount" class="gui-input" formControlName="additional1095cCount" placeholder="Aditional 1095C Count" aria-required="true" aria-invalid="true">
+                                                       <label class="field-icon">
+                                                          <i class="fa fa-user"></i>
+                                                        </label>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="section row">
+                                                <div class="col-md-6 ph10 mb5">
+                                                        <fieldset>
+                                                        <legend>ACA Subscriber</legend>
+                                                        <div class="option-group field">
+                                                         <label for="EisACASubY" class="option option-primary">
+                                                          <input type="radio" name="EisACASub"  id="EisACASubY" value="Y" formControlName="isAcaSubscriber">
+                                                          <span class="radio"></span> Yes
+                                                         </label>
+                                                        <label for="EisACASubN" class="option option-primary">
+                                                          <input type="radio" name="EisACASub" id="EisACASubN" value="N" formControlName="isAcaSubscriber">
+                                                           <span class="radio"></span> No
+                                                        </label>
+                                                        </div>
+                                                    </fieldset> 
+                                                </div>
+                                                 <div class="col-md-6 ph10 mb5">
+                                                    <fieldset>
+                                                        <legend>Filling Authoritative 1094C</legend>
+                                                        <div class="option-group field">
+                                                            <label for="EFillingAuthY" class="option option-primary">
+                                                         <input type="radio" name="Eisfilling" id="EFillingAuthY" value="Y" formControlName="isFilingAuthoritative1094c">
+                                                          <span class="radio"></span> Yes
+                                                        </label>
+
+                                                            <label for="EFillingAuthN" class="option option-primary">
+                                                          <input type="radio" name="Eisfilling" id="EFillingAuthN" value="N" formControlName="isFilingAuthoritative1094c">
+                                                           <span class="radio"></span> No
+                                                        </label>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+  
+                                            <div class="section row">
+                                                <div class="col-md-6 ph10 mb5">
+                                                      <fieldset>
+                                                        <legend>ACA Report Shared</legend>
+                                                        <div class="option-group field">
+                                                            <label for="EACAReportY" class="option option-primary">
+                                                         <input type="radio" name="rdisaca"  id="EACAReportY" value="Y" formControlName="isAcaReportingShared">
+                                                          <span class="radio"></span> Yes
+                                                        </label>
+
+                                                            <label for="EACAReportN" class="option option-primary">
+                                                          <input type="radio" name="rdisaca"  id="EACAReportN" value="N" formControlName="isAcaReportingShared">
+                                                           <span class="radio"></span> No
+                                                        </label>
+                                                        </div>
+                                                    </fieldset>             
+                                                </div>
+                                                 <div class="col-md-6 ph10 mb5">
+                                                    <fieldset>
+                                                        <legend>Section 4980H Transition Relief</legend>
+                                                        <div class="option-group field">
+                                                            <label for="ESection4980HA" class="option option-primary">
+                                                         <input type="radio" name="rdsel4980h"  id="ESection4980HA" value="Y" formControlName="hTransitionRelief">
+                                                          <span class="radio"></span>  A - 5099 Transition Relief
+                                                        </label>
+
+                                                            <label for="ESection4980HB" class="option option-primary">
+                                                          <input type="radio" name="rdsel4980h"  id="ESection4980HB" value="N" formControlName="hTransitionRelief">
+                                                           <span class="radio"></span>  B - 100 or More Transition Relief
+                                                        </label>
+
+                                                        <label for="ESection4980HN" class="option option-primary">
+                                                          <input type="radio" name="rdsel4980h"  id="ESection4980HN" value="" formControlName="hTransitionRelief">
+                                                           <span class="radio"></span>  None
+                                                        </label>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+ 
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="allcp-form allcp-list theme-primary center-block">
+                                                <h6 class="">Additional Fulltime/Total</h6>
+                                                <div class="section row">
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="firstname" formControlName="additiontionalFulltimeEeJan" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <label class="label-list">January</label>
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="lastname" formControlName="additiontionalTotalEeJan" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                </div>
+                                                <div class="section row">
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="firstname" formControlName="additiontionalFulltimeEeFeb" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <label class="label-list">Februray</label>
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="lastname" formControlName="additiontionalTotalEeFeb" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                </div>
+                                                <div class="section row">
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="firstname" formControlName="additiontionalFulltimeEeMar" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <label class="label-list">March</label>
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="lastname" formControlName="additiontionalTotalEeMar" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                </div>
+                                                <div class="section row">
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="firstname" formControlName="additiontionalFulltimeEeApr" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <label class="label-list">April</label>
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="lastname" formControlName="additiontionalTotalEeApr" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                </div>
+                                                <div class="section row">
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="firstname" formControlName="additiontionalFulltimeEeMay" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <label class="label-list">May</label>
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="lastname" formControlName="additiontionalTotalEeMay" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                </div>
+                                                <div class="section row">
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="firstname" formControlName="additiontionalFulltimeEeJun" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <label class="label-list">June</label>
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="lastname" formControlName="additiontionalTotalEeJun" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                </div>
+                                                <div class="section row">
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="firstname" formControlName="additiontionalFulltimeEeJul" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <label class="label-list">July</label>
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="lastname" formControlName="additiontionalTotalEeJul" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                </div>
+                                                <div class="section row">
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="firstname" formControlName="additiontionalFulltimeEeAug" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <label class="label-list">August</label>
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="lastname" formControlName="additiontionalTotalEeAug" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                </div>
+                                                <div class="section row">
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="firstname" formControlName="additiontionalFulltimeEeSep" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <label class="label-list">September</label>
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="lastname" formControlName="additiontionalTotalEeSep" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                </div>
+                                                <div class="section row">
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="firstname" formControlName="additiontionalFulltimeEeOct" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <label class="label-list">October</label>
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="lastname" formControlName="additiontionalTotalEeOct" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                </div>
+                                                <div class="section row">
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="firstname" formControlName="additiontionalFulltimeEeNov" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <label class="label-list">November</label>
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="lastname" formControlName="additiontionalTotalEeNov" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                </div>
+                                                <div class="section row">
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="firstname" formControlName="additiontionalFulltimeEeDec" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <label class="label-list">December</label>
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="lastname" formControlName="additiontionalTotalEeDec" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-footer text-right" >
+                                    <button type="submit" [disabled]="!aleDetailsForm.valid" class="btn btn-bordered btn-primary mb5" (click)="updateAleDetails()" data-dismiss="modal"> Submit</button>
+                                    <button type="reset" class="btn btn-bordered mb5" data-dismiss="modal"> Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModalNew" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">New ALE</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="chute chute-center">
+                        <div class="allcp-form theme-primary center-block">
+                            <!-- <closed> -->
+                            <form method="post" id="allcp-form" novalidate="novalidate" [formGroup]="aleDetailsForm" (ngSubmit)="createAleDetails()">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="section row">
+                                                <div class="col-md-6 ph10 mb5">
+                                                    <h6 class="">ALE Tax Year</h6>
+                                                    <label for="CAlename" class="field prepend-icon">
+                                                        <!--<select name="" id="" formControlName="aleId">
+                                                                <option *ngFor="let ale of aleMap" value="{{ale}}">{{ale}}</option>
+                                                        </select>-->
+                                                   <input type="text"  id="CAlename"  class="gui-input" formControlName="aleTaxYear" aria-required="true" aria-invalid="true">
+                                                    <label for="CAlename1" class="field-icon">
+                                                       <i class="fa fa-user"></i>
+                                                    </label>
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-6 ph10">
+                                                    <div class="mb5 mt5">
+                                                        <h6>Aditional 1095C Count</h6>
+                                                        <label for="CAdd1095C" class="field prepend-icon">
+                                                       <input type="text" id="CAdd1095C" class="gui-input" formControlName="additional1095cCount" placeholder="Aditional 1095C Count" aria-required="true" aria-invalid="true">
+                                                       <label for="CAdd1095C1" class="field-icon">
+                                                          <i class="fa fa-user"></i>
+                                                        </label>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="section row">
+                                                <div class="col-md-6 ph10 mb5">
+                                                   <h6>Control Group</h6>
+                                                   <label for="CControlGroup" class="field select">
+                                                       <select id="CControlGroup" formControlName="controlGroupId" aria-required="true" aria-invalid="true">
+                                                            <option value="" disabled selected>Select </option>
+                                                            <option *ngFor="let group of controlGroupMap" value={{group.controlGroupId}}>
+                                                                {{group.controlGroupName}}
+                                                            </option>
+                                                        </select>
+                                                       <!-- <input type="text" id="CControlGroup" class="gui-input" formControlName="controlGroupId" aria-required="true" aria-invalid="true">
+                                                       <label for="CControlGroup1" class="field-icon">
+                                                            <i class="fa fa-user"></i>
+                                                       </label>-->
+                                                        <i class="arrow"></i>
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-6 ph10">
+                                                    <h6 class="">ALE</h6>
+                                                    <label for="CALE" class="field select">
+                                                        <select id="CALE" formControlName="aleId" aria-required="true" aria-invalid="true">
+                                                            <option value="" disabled selected>Select </option>
+                                                            <option *ngFor="let ale of aleMap" value={{ale.aleId}}>
+                                                                {{ale.aleName}}
+                                                            </option>
+                                                        </select>
+                                                        <i class="arrow"></i>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+
+                                           
+                                            <div class="section row">
+                                                <div class="col-md-6 ph10 mb5">
+                                                        <fieldset>
+                                                        <legend>ACA Subscriber</legend>
+                                                        <div class="option-group field">
+                                                         <label for="rdAcaSubY" class="option option-primary">
+                                                          <input name="acasubscriber" type="radio"  id="rdAcaSubY" value="Y" formControlName="isAcaSubscriber">
+                                                          <span class="radio"></span> Yes
+                                                         </label>
+                                                        <label for="rdAcaSubN" class="option option-primary">
+                                                          <input name="acasubscriber" type="radio"  id="rdAcaSubN" value="N" formControlName="isAcaSubscriber">
+                                                           <span class="radio"></span> No
+                                                        </label>
+                                                        </div>
+                                                    </fieldset> 
+                                                </div>
+                                                 <div class="col-md-6 ph10 mb5">
+                                                    <fieldset>
+                                                        <legend>Filling Authoritative 1094C</legend>
+                                                        <div class="option-group field">
+                                                            <label for="radioisFilingAuthoritative1094cY" class="option option-primary">
+                                                         <input type="radio" name="rdFillingAuth" id="radioisFilingAuthoritative1094cY"  value="Y" formControlName="radioisFilingAuthoritative1094c">
+                                                          <span class="radio"></span> Yes
+                                                        </label>
+
+                                                            <label for="radioisFilingAuthoritative1094cN" class="option option-primary">
+                                                          <input type="radio" name="rdFillingAuth" id="radioisFilingAuthoritative1094cN" value="N" formControlName="radioisFilingAuthoritative1094c">
+                                                           <span class="radio"></span> No
+                                                        </label>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+  
+                                            <div class="section row">
+                                                <div class="col-md-6 ph10 mb5">
+                                                      <fieldset>
+                                                        <legend>ACA Report Shared</legend>
+                                                        <div class="option-group field">
+                                                            <label for="CACAReportSharedY" class="option option-primary">
+                                                         <input type="radio" name="rdAcaReportShared"  id="CACAReportSharedY"  value="Y" formControlName="isAcaReportingShared">
+                                                          <span class="radio"></span> Yes
+                                                        </label>
+
+                                                            <label for="CACAReportSharedN" class="option option-primary">
+                                                          <input type="radio"  name="rdAcaReportShared" id="CACAReportSharedN" value="N" formControlName="isAcaReportingShared">
+                                                           <span class="radio"></span> No
+                                                        </label>
+                                                        </div>
+                                                    </fieldset>             
+                                                </div>
+                                                 <div class="col-md-6 ph10 mb5">
+                                                    <fieldset>
+                                                        <legend>Section 4980H Transition Relief</legend>
+                                                        <div class="option-group field">
+                                                        <label for="4980HA" class="option option-primary">
+                                                         <input type="radio" name = "498h" id="4980HA"  value="A" formControlName="hTransitionRelief">
+                                                         <span class="radio"></span> A - 5099 Transition Relief
+                                                        </label>
+
+                                                            <label for="4980HB" class="option option-primary">
+                                                          <input type="radio" name = "498h"  id="4980HB" value="B" formControlName="hTransitionRelief">
+                                                           <span class="radio"></span>B - 100 or More Transition Relief
+                                                        </label>
+
+                                                        <label for="4980HN" class="option option-primary">
+                                                          <input type="radio" name = "498h" id="4980HN" value="N" formControlName="hTransitionRelief">
+                                                           <span class="radio"></span>None
+                                                        </label>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+ 
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="allcp-form allcp-list theme-primary center-block">
+                                                <h6 class="">Additional Fulltime/Total</h6>
+                                                <div class="section row">
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="firstname" formControlName="additiontionalFulltimeEeJan" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <label class="label-list">January</label>
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="lastname" formControlName="additiontionalTotalEeJan" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                </div>
+                                                <div class="section row">
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="firstname" formControlName="additiontionalFulltimeEeFeb" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <label class="label-list">Februray</label>
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="lastname" formControlName="additiontionalTotalEeFeb" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                </div>
+                                                <div class="section row">
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="firstname" formControlName="additiontionalFulltimeEeMar" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <label class="label-list">March</label>
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="lastname" formControlName="additiontionalTotalEeMar" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                </div>
+                                                <div class="section row">
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="firstname" formControlName="additiontionalFulltimeEeApr" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <label class="label-list">April</label>
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="lastname" formControlName="additiontionalTotalEeApr" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                </div>
+                                                <div class="section row">
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="firstname" formControlName="additiontionalFulltimeEeMay" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <label class="label-list">May</label>
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="lastname" formControlName="additiontionalTotalEeMay" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                </div>
+                                                <div class="section row">
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="firstname" formControlName="additiontionalFulltimeEeJun" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <label class="label-list">June</label>
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="lastname" formControlName="additiontionalTotalEeJun" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                </div>
+                                                <div class="section row">
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="firstname" formControlName="additiontionalFulltimeEeJul" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <label class="label-list">July</label>
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="lastname" formControlName="additiontionalTotalEeJul" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                </div>
+                                                <div class="section row">
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="firstname" formControlName="additiontionalFulltimeEeAug" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <label class="label-list">August</label>
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="lastname" formControlName="additiontionalTotalEeAug" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                </div>
+                                                <div class="section row">
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="firstname" formControlName="additiontionalFulltimeEeSep" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <label class="label-list">September</label>
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="lastname" formControlName="additiontionalTotalEeSep" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                </div>
+                                                <div class="section row">
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="firstname" formControlName="additiontionalFulltimeEeOct" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <label class="label-list">October</label>
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="lastname" formControlName="additiontionalTotalEeOct" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                </div>
+                                                <div class="section row">
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="firstname" formControlName="additiontionalFulltimeEeNov" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <label class="label-list">November</label>
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="lastname" formControlName="additiontionalTotalEeNov" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                </div>
+                                                <div class="section row">
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="firstname" formControlName="additiontionalFulltimeEeDec" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <label class="label-list">December</label>
+                                                    </div>
+                                                    <div class="col-md-4 ph10 mb5">
+                                                        <input type="text" id="lastname" formControlName="additiontionalTotalEeDec" class="gui-input" placeholder="" aria-required="true"
+                                                            aria-invalid="true">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-footer text-right" >
+                                    <button type="submit" [disabled]="!aleDetailsForm.valid" class="btn btn-bordered btn-primary mb5" (click)="createAleDetails()" data-dismiss="modal"> Submit</button>                                    
+                                    <button type="reset" class="btn btn-bordered mb5" data-dismiss="modal"> Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">ALE Details</h4>
+                </div>
+                <div class="modal-body">
+                    <h4 class="text-center">Are you sure want to <span>Delete</span>?</h4>
+                </div>
+                <div class="panel-footer text-right">
+                    <button type="submit" class="btn btn-bordered btn-primary mb5" data-toggle="modal" data-target="#confirm-delete" data-dismiss="modal" (click)="deleteAleDetailsConfirm()"> Confirm</button>
+                    <button type="reset" class="btn btn-bordered mb5" data-dismiss="modal"> Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Information</h4>
+                </div>
+                <div class="modal-body">
+                    <h4 class="text-center">Deleted Sucessfully</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-bordered btn-primary mb5" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

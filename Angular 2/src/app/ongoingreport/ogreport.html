@@ -1,0 +1,191 @@
+<!-- -------------- Main Wrapper -------------- -->
+<section id="content_wrapper">
+    <!-- -------------- Topbar -------------- -->
+    <header id="topbar" class="ph10">
+        <div class="topbar-left">
+            <div class="allcp-form theme-primary">
+                <div class="panel panel-primary" id="p2" data-panel-color="false" data-panel-fullscreen="false" data-panel-remove="false"
+                    data-panel-title="false">
+                    <div class="panel-heading">
+                        <span class="panel-title">Eligibility Report Ongoing</span>
+                        <span class="panel-icon pull-right">
+                            <a id="btnDownloadPdf"  class="fa fa-file-pdf-o" (click)="downloadPdf()"></a>
+                            <a id="btnDownloadExcel" class="fa fa-file-excel-o" (click)="downloadExcel()" ></a>
+                        </span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-horizontal">
+                            <div class="row">
+                            <div class="col-sm-9">
+                                <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-5 control-label"><h6><i class="fa fa-group"></i> Control Group</h6></label>
+                                            <div class="col-sm-7">
+                                                <label class="field select">
+                                                    <select (change)="endDatesOfCG($event)" id="selcontrolgroup" name="controlgroup" formControlName="controlGroup" [ngClass]="{'error':!validateControlGroups()}">
+                                                    <option selected disabled value="">All</option>
+                                                    <option *ngFor="let group of controlGroups" value={{group}}>
+                                                        {{group}}
+                                                    </option>
+                                                    </select>
+                                                    <i class="arrow"></i>
+                                                </label>
+                                                <em *ngIf="!validateControlGroups()" >Please select valid Control Group</em>
+                                            </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-5 control-label"><h6><i class="fa fa-calendar"></i> Measurement End Date</h6></label>
+                                        <div class="col-sm-7">
+                                            <label class="field select">
+                                                <select id="seldate" name="date" formControlName="measurementEndDate">
+                                                    <option selected disabled value="">Select Date</option>
+                                                    <option *ngFor="let date of measurementEndDates" value={{date}}>
+                                                        {{date}}
+                                                    </option>
+                                                </select>
+                                                <i class="arrow"></i>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-5 control-label"><h6><i class="fa fa-dashboard"></i> Type of Hours</h6></label>
+                                        <div class="col-sm-7">
+                                            <label class="field select">
+                                                <select id="selTypeofHours" name="typeofHours" formControlName="typeOfHour">
+                                                    <option selected disabled value="">All</option>
+                                                    <option *ngFor="let hour of typeOfHours" value={{hour}}>
+                                                        {{hour}}
+                                                    </option>
+                                                </select>
+                                                <i class="arrow"></i>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                       <label for="inputPassword3" class="col-sm-5 control-label"><h6><i class="fa fa-clock-o"></i> Avg. Weekly Hours Tresshold</h6></label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control" formControlName="avgWeeklyHoursThreshold" id="inputPassword3">
+                                        </div>
+                                    </div>                                    
+                                </div>
+                                </div>
+                                <hr class="short">
+                                <div class="row">
+                                <div class="col-md-6 text-right">
+                                    <button class="btn btn-bordered btn-primary mb5" (click)="Search()">Filter</button>
+                                </div>
+                                <div class="col-md-6 text-left">
+                                    <button class="btn btn-bordered mb5" (click)="reset()">Reset</button>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="hidden" [(ngModel)]="selectedweekCount" />
+                                            <div class="panel panel-primary green_block" style="cursor:pointer">
+                                                <div class="panel-body" (click)="getWeekData(13)">
+                                                    <h1>{{count13Weeks}}</h1>
+                                                </div>
+                                                <div class="panel-footer" (click)="getWeekData(13)">13 WEEKS</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="panel panel-primary blue_block" style="cursor:pointer">
+                                                <div class="panel panel-primary blue_block">
+                                                    <div class="panel-body" (click)="getWeekData(26)">
+                                                        <h1>{{count26Weeks}}</h1>
+                                                    </div>
+                                                    <div class="panel-footer" (click)="getWeekData(26)">26 WEEKS</div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="panel panel-primary teal_block"  style="cursor:pointer">
+                                                <div class="panel panel-primary teal_block">
+                                                    <div class="panel-body" (click)="getWeekData(47)">
+                                                        <h1>{{count47Weeks}}</h1>
+                                                    </div>
+                                                    <div class="panel-footer" (click)="getWeekData(47)">47 WEEKS</div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="panel panel-primary orange_block"  style="cursor:pointer">
+                                                <div class="panel panel-primary orange_block">
+                                                    <div class="panel-body" (click)="getWeekData(52)">
+                                                        <h1>{{count52Weeks}}</h1>
+                                                    </div>
+                                                    <div class="panel-footer" (click)="getWeekData(52)">52 WEEKS</div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- -------------- /Topbar -------------- -->
+
+
+    <!-- -------------- Content -------------- -->
+    <section id="content" class="table-layout animated fadeIn" *ngIf="dataLoaded">
+        <div class="panel panel-visible p20" id="spy3">
+            <div class="panel-heading">
+                <div class="panel-title hidden-xs">
+                    Report Details
+                </div>
+            </div>
+            <div class="panel-body pn">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">Search</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="inputEmail3" placeholder="Search" *ngIf="config.filtering" [ngTableFiltering]="config.filtering"
+                                        (tableChanged)="onChangeTable(config)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="table-responsive over-x_table">
+                            <ng-table id="datatable" ngclass="table table-striped table-bordered table-hover" [config]="config" (tableChanged)="onChangeTable(config)"
+                                (cellClicked)="onCellClick($event)" [rows]="rows" [columns]="columns">
+                            </ng-table>
+                            <pagination *ngIf="config.paging" class="pagination-sm" [(ngModel)]="page" [totalItems]="length" [itemsPerPage]="itemsPerPage"
+                                [maxSize]="maxSize" [boundaryLinks]="false" [rotate]="false" (pageChanged)="onChangeTable(config, $event)"
+                                (numPages)="numPages = $event">
+                            </pagination>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- -------------- /Content -------------- -->
+    
+    <div>
+        {{test}}
+    </div>
+
+</section>

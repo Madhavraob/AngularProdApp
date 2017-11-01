@@ -1,0 +1,189 @@
+<!-- -------------- Main Wrapper -------------- -->
+<section id="content_wrapper">
+    <!-- -------------- Topbar -------------- -->
+    <header id="topbar" class="ph10">
+        <div class="topbar-left">
+            <div class="allcp-form theme-primary">
+                <div class="panel panel-primary" id="p2" data-panel-color="false" data-panel-fullscreen="false" data-panel-remove="false"
+                    data-panel-title="false">
+                    <div class="panel-heading">
+                        <span class="panel-title">Eligibility Non Full Time Report</span>
+                        <span class="panel-icon pull-right">
+                            <a id="btnDownloadPdf"  class="fa fa-file-pdf-o" (click)="downloadPdf()"></a>
+                            <a id="btnDownloadExcel" class="fa fa-file-excel-o" (click)="downloadExcel()" ></a>
+                        </span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-horizontal">
+                            <div class="row">
+                            <div class="col-sm-9">
+                                <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-5 control-label"><h6><i class="fa fa-calendar"></i> Select Element</h6></label>
+                                            <div class="col-sm-7">
+                                                <label class="field select">
+                                                    <select id="selYear" (change)="yearmonthChange($event)" name="country" [(ngModel)]="selectedYear" aria-placeholder="Select year">
+                                                        <option value="-1">Select Year</option>
+                                                        <option *ngFor="let year of Years" value={{year}}>
+                                                            {{year}}
+                                                        </option>
+                                                    </select>
+                                                    <i class="arrow"></i>
+                                                </label>
+                                            </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-5 control-label"><h6><i class="fa fa-calendar"></i> Hire Month</h6></label>
+                                        <div class="col-sm-7">
+                                            <label class="field select">
+                                                <select id="selmonth" (change)="yearmonthChange($event)" name="month" [(ngModel)]="selectedHireMonth" >
+                                                    <option value="-1">Select Month</option>
+                                                    <option *ngFor="let month of Months" value={{month}}>
+                                                        {{month}}
+                                                    </option>
+                                                </select>
+                                                <i class="arrow"></i>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-5 control-label"><h6><i class="fa fa-group"></i> Control Group</h6></label>
+                                        <div class="col-sm-7">
+                                            <ss-multiselect-dropdown [options]="myOptions" [settings]="mySettings" [texts]="myTexts" [(ngModel)]="selectedControlGroup"></ss-multiselect-dropdown>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-5 control-label"><h6><i class="fa fa-clock-o"></i> Avg. Weekly Hours Tresshold</h6></label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control" [(ngModel)]="AvgWeeklyHrsThr" id="inputPassword3">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                       <label class="col-sm-5 control-label"><h6><i class="fa fa-dashboard"></i> Type of Hours</h6></label>
+                                        <div class="col-sm-7">
+                                            <label class="field select">
+                                                <select id="selTypeofHours" name="typeofHours" [(ngModel)]="selectedTypeOfHours">
+                                                    <option value="-1">All</option>
+                                                    <option *ngFor="let hour of TypeOfHours" value={{hour}}>
+                                                        {{hour}}
+                                                    </option>
+                                                </select>
+                                                <i class="arrow"></i>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                       <label class="col-sm-5 control-label"><h6><i class="fa fa-dashboard"></i> Non Full Time Categories</h6></label>
+                                        <div class="col-sm-7">
+                                            <label class="field select">
+                                                <select class="select2-multiple form-control select-primary" multiple="multiple" [(ngModel)]="selectedNonFullTimeCatgeories">
+                                                <option *ngFor="let category of NonFullTimeCatgeories" value={{category}}>
+                                                    {{category}}
+                                                </option>
+                                            </select>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <hr class="short">
+                                <div class="row">
+                                <div class="col-md-6 text-right">
+                                    <button [disabled]="disableFilter" class="btn btn-bordered btn-primary mb5" type="button" (click)="Search()">Filter</button>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <button class="btn btn-bordered mb5" type="button" (click)="reset()">Reset</button>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                        <div class="row">
+                                       		<div class="col-md-6">
+                                                <div class="panel panel-primary green_block">
+                                                    <div class="panel-body" (click)="getWeekData(13)">
+                                                        <h1>{{count13Weeks}}</h1>
+                                                    </div>
+                                                    <div class="panel-footer" (click)="getWeekData(13)">13 WEEKS</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="panel panel-primary blue_block">
+                                                    <div class="panel-body">
+                                                    <h1>{{count26Weeks}}</h1>
+                                                    </div>
+                                                    <div class="panel-footer">26 WEEKS</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">                                            
+                                            <div class="col-md-6">
+                                                <div class="panel panel-primary teal_block">
+                                                    <div class="panel-body">
+                                                    <h1>{{count47Weeks}}</h1>
+                                                    </div>
+                                                    <div class="panel-footer">47 WEEKS</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="panel panel-primary orange_block">
+                                                    <div class="panel-body">
+                                                    <h1>{{count52Weeks}}</h1>
+                                                    </div>
+                                                    <div class="panel-footer">52 WEEKS</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- -------------- /Topbar -------------- -->
+    <!-- -------------- Content -------------- -->
+    <section id="content" class="table-layout animated fadeIn" *ngIf="dataLoaded">
+        <div class="panel panel-visible p20" id="spy3">
+            <div class="panel-heading">
+                <div class="panel-title hidden-xs">
+                    Report Details
+                </div>
+            </div>
+            <div class="panel-body pn">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label">Search</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="inputEmail3" placeholder="Search" *ngIf="config.filtering" [ngTableFiltering]="config.filtering"
+                                        (tableChanged)="onChangeTable(config)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="table-responsive over-x_table">
+                            <ng-table id="datatable" ngclass="table table-striped table-bordered table-hover" [config]="config" (tableChanged)="onChangeTable(config)"
+                                (cellClicked)="onCellClick($event)" [rows]="rows" [columns]="columns">
+                            </ng-table>
+                            <pagination *ngIf="config.paging" class="pagination-sm" [(ngModel)]="page" [totalItems]="length" [itemsPerPage]="itemsPerPage"
+                                [maxSize]="maxSize" [boundaryLinks]="false" [rotate]="false" (pageChanged)="onChangeTable(config, $event)"
+                                (numPages)="numPages = $event">
+                            </pagination>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- -------------- /Content -------------- -->
+</section>
